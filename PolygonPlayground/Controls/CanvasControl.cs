@@ -9,6 +9,7 @@
 // <remarks></remarks>
 
 using PolygonLibrary;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -26,17 +27,6 @@ namespace PolygonPlayground
         : UserControl
     {
         #region Constants
-        /// <summary>
-        /// The "size" of an object for mouse over purposes.
-        /// </summary>
-        private const int objectRadius = 3;
-
-        /// <summary>
-        /// We're over an object if the distance squared
-        /// between the mouse and the object is less than this.
-        /// </summary>
-        private const int objectRadiusSquared = objectRadius * objectRadius;
-
         /// <summary>
         /// The new polygon stroke
         /// </summary>
@@ -171,6 +161,12 @@ namespace PolygonPlayground
         public int HandleRadius { get; set; }
 
         /// <summary>
+        /// We're over an object if the distance squared
+        /// between the mouse and the object is less than this.
+        /// </summary>
+        private int HandleRadiusSquared => HandleRadius * HandleRadius;
+
+        /// <summary>
         /// Gets or sets the pan point.
         /// </summary>
         /// <value>
@@ -217,7 +213,7 @@ namespace PolygonPlayground
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void CanvasControl_Resize(object sender, System.EventArgs e)
+        private void CanvasControl_Resize(object sender, EventArgs e)
         {
             Invalidate();
         }
@@ -247,7 +243,7 @@ namespace PolygonPlayground
                         // Draw the polygon.
                         shape.DrawGeometry(g, polygonFill, polygonStroke);
                         // Draw the corners.
-                        shape.DrawNodes(g, polygonNodeFill, polygonNodeStroke, objectRadius);
+                        shape.DrawNodes(g, polygonNodeFill, polygonNodeStroke, HandleRadius);
                     }
                 }
             }
@@ -483,7 +479,7 @@ namespace PolygonPlayground
         }
 
         /// <summary>
-        /// Handles the MouseDoubleClick event of the PicCanvas control.
+        /// Handles the MouseDoubleClick event of the CanvasControl control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="MouseEventArgs" /> instance containing the event data.</param>
@@ -560,7 +556,7 @@ namespace PolygonPlayground
         }
 
         /// <summary>
-        /// Handles the MouseDoubleClick event of the PicCanvas control.
+        /// Handles the MouseDoubleClick event of the CanvasControl control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="MouseEventArgs" /> instance containing the event data.</param>
@@ -652,28 +648,53 @@ namespace PolygonPlayground
             Invalidate();
         }
 
+        /// <summary>
+        /// Handles the MouseEnter event of the CanvasControl control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void CanvasControl_MouseEnter(object sender, System.EventArgs e)
+        private void CanvasControl_MouseEnter(object sender, EventArgs e)
         {
         }
 
+        /// <summary>
+        /// Handles the MouseHover event of the CanvasControl control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void CanvasControl_MouseHover(object sender, System.EventArgs e)
+        private void CanvasControl_MouseHover(object sender, EventArgs e)
         {
         }
 
+        /// <summary>
+        /// Handles the MouseLeave event of the CanvasControl control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void CanvasControl_MouseLeave(object sender, System.EventArgs e)
+        private void CanvasControl_MouseLeave(object sender, EventArgs e)
         {
         }
 
+        /// <summary>
+        /// Handles the Enter event of the CanvasControl control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void CanvasControl_Enter(object sender, System.EventArgs e)
+        private void CanvasControl_Enter(object sender, EventArgs e)
         {
         }
 
+        /// <summary>
+        /// Handles the Leave event of the CanvasControl control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void CanvasControl_Leave(object sender, System.EventArgs e)
+        private void CanvasControl_Leave(object sender, EventArgs e)
         {
         }
         #endregion
@@ -686,7 +707,7 @@ namespace PolygonPlayground
         /// <param name="group">The group.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static (bool Success, IGeometry<PointF> HitPolygon, int HitPoint) MouseIsOverCornerPoint(PointF mousePoint, Group group)
+        private (bool Success, IGeometry<PointF> HitPolygon, int HitPoint) MouseIsOverCornerPoint(PointF mousePoint, Group group)
         {
             if (group is Group shapes)
             {
@@ -731,7 +752,7 @@ namespace PolygonPlayground
         /// The <see cref="bool" />.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static (bool Success, IGeometry<PointF> HitPolygon, int HitPoint) MouseIsOverCornerPoint(PointF mousePoint, Polygon polygon)
+        private (bool Success, IGeometry<PointF> HitPolygon, int HitPoint) MouseIsOverCornerPoint(PointF mousePoint, Polygon polygon)
         {
             // See if we're over a corner point.
             foreach (var contour in polygon)
@@ -740,7 +761,7 @@ namespace PolygonPlayground
                 for (var i = 0; i < contour.Count; i++)
                 {
                     // See if we're over this point.
-                    if (DistanceSquared(contour[i], mousePoint) < objectRadiusSquared * 2)
+                    if (DistanceSquared(contour[i], mousePoint) < HandleRadiusSquared * 2)
                     {
                         // We're over this point.
                         return (true, contour, i);
@@ -760,13 +781,13 @@ namespace PolygonPlayground
         /// The <see cref="bool" />.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static (bool Success, IGeometry<PointF> HitPolygon, int HitPoint) MouseIsOverCornerPoint(PointF mousePoint, PolygonContour polygonContour)
+        private (bool Success, IGeometry<PointF> HitPolygon, int HitPoint) MouseIsOverCornerPoint(PointF mousePoint, PolygonContour polygonContour)
         {
             // See if we're over one of the polygon's corner points.
             for (var i = 0; i < polygonContour.Count; i++)
             {
                 // See if we're over this point.
-                if (DistanceSquared(polygonContour[i], mousePoint) < objectRadiusSquared * 2)
+                if (DistanceSquared(polygonContour[i], mousePoint) < HandleRadiusSquared * 2)
                 {
                     // We're over this point.
                     return (true, polygonContour, i);
@@ -785,7 +806,7 @@ namespace PolygonPlayground
         /// The <see cref="bool" />.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static (bool Success, IGeometry<PointF> HitPolygon, int HitPoint1, int HitPoint2, PointF NearestPoint) MouseIsOverEdge(PointF mousePoint, Group group)
+        private (bool Success, IGeometry<PointF> HitPolygon, int HitPoint1, int HitPoint2, PointF NearestPoint) MouseIsOverEdge(PointF mousePoint, Group group)
         {
             if (group is Group shapes)
             {
@@ -831,7 +852,7 @@ namespace PolygonPlayground
         /// The <see cref="bool" />.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static (bool Success, IGeometry<PointF> HitPolygon, int HitPoint1, int HitPoint2, PointF NearestPoint) MouseIsOverEdge(PointF mousePoint, Polygon polygon)
+        private (bool Success, IGeometry<PointF> HitPolygon, int HitPoint1, int HitPoint2, PointF NearestPoint) MouseIsOverEdge(PointF mousePoint, Polygon polygon)
         {
             // Examine each polygon in reverse order to check the ones on top first.
             for (var polygonIndex = polygon.Count - 1; polygonIndex >= 0; polygonIndex--)
@@ -844,7 +865,7 @@ namespace PolygonPlayground
                 {
                     // See if we're over the segment between these points.
                     var query = DistanceToLineSegmentSquared(mousePoint, contour[cursorIndex], contour[pointIndex]);
-                    if (query.Distnce < objectRadiusSquared)
+                    if (query.Distnce < HandleRadiusSquared)
                     {
                         // We are over this segment.
                         return (true, contour, cursorIndex, pointIndex, query.Point);
@@ -867,7 +888,7 @@ namespace PolygonPlayground
         /// The <see cref="bool" />.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static (bool Success, IGeometry<PointF> HitPolygon, int HitPoint1, int HitPoint2, PointF NearestPoint) MouseIsOverEdge(PointF mousePoint, PolygonContour contour)
+        private (bool Success, IGeometry<PointF> HitPolygon, int HitPoint1, int HitPoint2, PointF NearestPoint) MouseIsOverEdge(PointF mousePoint, PolygonContour contour)
         {
             // See if we're over one of the polygon's segments.
             var cursorIndex = contour.Count - 1;
@@ -875,7 +896,7 @@ namespace PolygonPlayground
             {
                 // See if we're over the segment between these points.
                 var query = DistanceToLineSegmentSquared(mousePoint, contour[cursorIndex], contour[pointIndex]);
-                if (query.Distnce < objectRadiusSquared)
+                if (query.Distnce < HandleRadiusSquared)
                 {
                     // We are over this segment.
                     return (true, contour, cursorIndex, pointIndex, query.Point);
@@ -897,7 +918,7 @@ namespace PolygonPlayground
         /// The <see cref="bool" />.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static (bool Success, IGeometry<PointF> HitPolygon) MouseIsOverPolygon(PointF mousePoint, Group group)
+        private (bool Success, IGeometry<PointF> HitPolygon) MouseIsOverPolygon(PointF mousePoint, Group group)
         {
             if (group is Group shapes)
             {

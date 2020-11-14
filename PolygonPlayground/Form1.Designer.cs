@@ -24,7 +24,7 @@ namespace PolygonPlayground
         /// <summary>
         /// The canvas control
         /// </summary>
-        private CanvasControl canvasControl1;
+        private CanvasControl canvasControl;
 
         /// <summary>
         /// The button reset pan
@@ -60,11 +60,11 @@ namespace PolygonPlayground
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.buttonResetPan = new System.Windows.Forms.Button();
             this.buttonResetScale = new System.Windows.Forms.Button();
-            this.canvasControl1 = new PolygonPlayground.CanvasControl();
+            this.canvasControl = new PolygonPlayground.CanvasControl();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -98,18 +98,18 @@ namespace PolygonPlayground
             this.buttonResetScale.UseVisualStyleBackColor = true;
             this.buttonResetScale.Click += new System.EventHandler(this.ButtonResetScale_Click);
             // 
-            // canvasControl1
+            // canvasControl
             // 
-            this.canvasControl1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.canvasControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvasControl1.GhostPolygonPen = null;
-            this.canvasControl1.HandleRadius = 0;
-            this.canvasControl1.Location = new System.Drawing.Point(0, 0);
-            this.canvasControl1.Name = "canvasControl1";
-            this.canvasControl1.PanPoint = ((System.Drawing.PointF)(resources.GetObject("canvasControl1.PanPoint")));
-            this.canvasControl1.Scale = 1F;
-            this.canvasControl1.Size = new System.Drawing.Size(740, 495);
-            this.canvasControl1.TabIndex = 3;
+            this.canvasControl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.canvasControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvasControl.GhostPolygonPen = null;
+            this.canvasControl.HandleRadius = 0;
+            this.canvasControl.Location = new System.Drawing.Point(0, 0);
+            this.canvasControl.Name = "canvasControl";
+            this.canvasControl.PanPoint = ((System.Drawing.PointF)(resources.GetObject("canvasControl.PanPoint")));
+            this.canvasControl.Scale = 1F;
+            this.canvasControl.Size = new System.Drawing.Size(740, 495);
+            this.canvasControl.TabIndex = 3;
             // 
             // splitContainer1
             // 
@@ -118,7 +118,7 @@ namespace PolygonPlayground
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.canvasControl1);
+            this.splitContainer1.Panel1.Controls.Add(this.canvasControl);
             // 
             // splitContainer1.Panel2
             // 
@@ -145,14 +145,6 @@ namespace PolygonPlayground
             this.splitContainer2.SplitterDistance = 100;
             this.splitContainer2.TabIndex = 5;
             // 
-            // propertyGrid1
-            // 
-            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
-            this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(165, 391);
-            this.propertyGrid1.TabIndex = 5;
-            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.buttonResetPan);
@@ -163,6 +155,14 @@ namespace PolygonPlayground
             this.flowLayoutPanel1.Size = new System.Drawing.Size(165, 100);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
+            // propertyGrid1
+            // 
+            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
+            this.propertyGrid1.Name = "propertyGrid1";
+            this.propertyGrid1.Size = new System.Drawing.Size(165, 391);
+            this.propertyGrid1.TabIndex = 5;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -170,7 +170,7 @@ namespace PolygonPlayground
             this.ClientSize = new System.Drawing.Size(933, 519);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
-            this.Text = "Polycurve Clipping Playground";
+            this.Text = "Polygon Playground";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

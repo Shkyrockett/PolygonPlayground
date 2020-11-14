@@ -141,6 +141,11 @@ namespace PolygonLibrary
         /// </summary>
         /// <param name="index">The index.</param>
         void RemoveAt(int index) { }
+
+        /// <summary>
+        /// Clears this instance.
+        /// </summary>
+        void Clear() { }
         #endregion Methods
     }
 }

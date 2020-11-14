@@ -171,7 +171,7 @@ namespace PolygonLibrary
             Points.Reverse();
             return this;
         }
-        #endregion Mutators
+        #endregion
 
         #region Methods
         /// <summary>

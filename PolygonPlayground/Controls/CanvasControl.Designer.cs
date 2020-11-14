@@ -62,7 +62,6 @@ namespace PolygonPlayground
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.CanvasControl_MouseWheel);
             this.Resize += new System.EventHandler(this.CanvasControl_Resize);
             this.ResumeLayout(false);
-
         }
         #endregion
     }

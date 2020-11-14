@@ -17,7 +17,7 @@ using static System.MathF;
 namespace PolygonLibrary
 {
     /// <summary>
-    /// 
+    /// The Mathematics class.
     /// </summary>
     public static class Mathematics
     {

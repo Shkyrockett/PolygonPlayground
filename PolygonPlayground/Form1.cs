@@ -50,7 +50,7 @@ namespace PolygonPlayground
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void ButtonResetPan_Click(object sender, EventArgs e)
         {
-            canvasControl1.PanPoint = new PointF(0f, 0f);
+            canvasControl.PanPoint = new PointF(0f, 0f);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace PolygonPlayground
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void ButtonResetScale_Click(object sender, EventArgs e)
         {
-            canvasControl1.Scale = 1;
+            canvasControl.Scale = 1;
         }
         #endregion Event Handlers
     }
