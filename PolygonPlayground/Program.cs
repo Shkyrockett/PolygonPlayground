@@ -9,6 +9,8 @@
 // <remarks></remarks>
 
 using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace PolygonPlayground
@@ -24,6 +26,9 @@ namespace PolygonPlayground
         [STAThread]
         private static void Main()
         {
+            TypeDescriptor.AddAttributes(typeof(PointF), new TypeConverterAttribute(typeof(ExpandableObjectConverter)));
+            TypeDescriptor.AddAttributes(typeof(PointF), new SerializableAttribute());
+
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

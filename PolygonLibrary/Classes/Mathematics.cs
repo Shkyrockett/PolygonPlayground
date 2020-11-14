@@ -216,6 +216,7 @@ namespace PolygonLibrary
         {
             // Default value is no inclusion.
             var result = Inclusions.Outside;
+            if (points is null) return result;
 
             // Special cases for points and line segments.
             if (points?.Count < 3)
@@ -242,7 +243,7 @@ namespace PolygonLibrary
             }
 
             // Loop through each line segment.
-            var curPoint = points[0];
+            var curPoint = points![0];
             for (var i = 1; i <= points.Count; ++i)
             {
                 var nextPoint = i == points.Count ? points[0] : points[i];
@@ -335,7 +336,7 @@ namespace PolygonLibrary
         /// <param name="scale">The scale.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static PointF ScreenToObject(PointF point, float scale) => new PointF(point.X / scale, point.Y / scale);
+        public static PointF ScreenToObject(PointF point, float scale) => new(point.X / scale, point.Y / scale);
 
         /// <summary>
         /// Inverses the translation and scale of a point.
@@ -359,7 +360,7 @@ namespace PolygonLibrary
         /// <param name="scale">The scale.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static PointF ScreenToObject(PointF offset, PointF point, float scale) => new PointF((point.X - offset.X) / scale, (point.Y - offset.Y) / scale);
+        public static PointF ScreenToObject(PointF offset, PointF point, float scale) => new((point.X - offset.X) / scale, (point.Y - offset.Y) / scale);
 
         /// <summary>
         /// Screens to object transposed matrix.
@@ -383,7 +384,7 @@ namespace PolygonLibrary
         /// <param name="scale">The scale.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static PointF ScreenToObjectTransposedMatrix(PointF offset, PointF screenPoint, float scale) => new PointF((screenPoint.X / scale) - offset.X, (screenPoint.Y / scale) - offset.Y);
+        public static PointF ScreenToObjectTransposedMatrix(PointF offset, PointF screenPoint, float scale) => new((screenPoint.X / scale) - offset.X, (screenPoint.Y / scale) - offset.Y);
 
         /// <summary>
         /// Objects to screen.
@@ -392,7 +393,7 @@ namespace PolygonLibrary
         /// <param name="scale">The scale.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static PointF ObjectToScreen(PointF point, float scale) => new PointF(point.X * scale, point.Y * scale);
+        public static PointF ObjectToScreen(PointF point, float scale) => new(point.X * scale, point.Y * scale);
 
         /// <summary>
         /// Objects to screen. https://stackoverflow.com/a/37269366
@@ -402,7 +403,7 @@ namespace PolygonLibrary
         /// <param name="scale">The scale.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static PointF ObjectToScreen(PointF offset, PointF point, float scale) => new PointF(offset.X + (point.X * scale), offset.Y + (point.Y * scale));
+        public static PointF ObjectToScreen(PointF offset, PointF point, float scale) => new(offset.X + (point.X * scale), offset.Y + (point.Y * scale));
 
         /// <summary>
         /// Objects to screen transposed matrix. https://stackoverflow.com/a/37269366
@@ -412,7 +413,7 @@ namespace PolygonLibrary
         /// <param name="scale">The scale.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static PointF ObjectToScreenTransposedMatrix(PointF offset, PointF objectPoint, float scale) => new PointF((offset.X + objectPoint.X) * scale, (offset.Y + objectPoint.Y) * scale);
+        public static PointF ObjectToScreenTransposedMatrix(PointF offset, PointF objectPoint, float scale) => new((offset.X + objectPoint.X) * scale, (offset.Y + objectPoint.Y) * scale);
 
         /// <summary>
         /// Zooms at. https://stackoverflow.com/a/37269366
@@ -431,7 +432,7 @@ namespace PolygonLibrary
         }
 
         /// <summary>
-        /// Zooms at transposed matrix. https://stackoverflow.com/a/37269366
+        /// Zooms at for a transposed matrix. https://stackoverflow.com/a/37269366
         /// </summary>
         /// <param name="offset">The offset.</param>
         /// <param name="cursor">The cursor.</param>
@@ -454,7 +455,7 @@ namespace PolygonLibrary
         /// <param name="subtrahend">The subtrahend.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static PointF Subtract(this PointF minuend, PointF subtrahend) => new PointF(minuend.X - subtrahend.X, minuend.Y - subtrahend.Y);
+        public static PointF Subtract(this PointF minuend, PointF subtrahend) => new(minuend.X - subtrahend.X, minuend.Y - subtrahend.Y);
 
         /// <summary>
         /// Subtracts the specified subtrahend.
@@ -463,7 +464,7 @@ namespace PolygonLibrary
         /// <param name="subtrahend">The subtrahend.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static PointF Subtract(this PointF minuend, Point subtrahend) => new PointF(minuend.X - subtrahend.X, minuend.Y - subtrahend.Y);
+        public static PointF Subtract(this PointF minuend, Point subtrahend) => new(minuend.X - subtrahend.X, minuend.Y - subtrahend.Y);
 
         /// <summary>
         /// Subtracts the specified subtrahend.
@@ -472,7 +473,7 @@ namespace PolygonLibrary
         /// <param name="subtrahend">The subtrahend.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static PointF Subtract(this Point minuend, PointF subtrahend) => new PointF(minuend.X - subtrahend.X, minuend.Y - subtrahend.Y);
+        public static PointF Subtract(this Point minuend, PointF subtrahend) => new(minuend.X - subtrahend.X, minuend.Y - subtrahend.Y);
 
         /// <summary>
         /// Subtracts the specified subtrahend.
@@ -481,7 +482,7 @@ namespace PolygonLibrary
         /// <param name="subtrahend">The subtrahend.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Point Subtract(this Point minuend, Point subtrahend) => new Point(minuend.X - subtrahend.X, minuend.Y - subtrahend.Y);
+        public static Point Subtract(this Point minuend, Point subtrahend) => new(minuend.X - subtrahend.X, minuend.Y - subtrahend.Y);
         #endregion
 
         #region Add Point
@@ -492,7 +493,7 @@ namespace PolygonLibrary
         /// <param name="subtrahend">The subtrahend.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static PointF Add(this PointF minuend, PointF subtrahend) => new PointF(minuend.X + subtrahend.X, minuend.Y + subtrahend.Y);
+        public static PointF Add(this PointF minuend, PointF subtrahend) => new(minuend.X + subtrahend.X, minuend.Y + subtrahend.Y);
 
         /// <summary>
         /// Adds the specified subtrahend.
@@ -501,7 +502,7 @@ namespace PolygonLibrary
         /// <param name="subtrahend">The subtrahend.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static PointF Add(this PointF minuend, Point subtrahend) => new PointF(minuend.X + subtrahend.X, minuend.Y + subtrahend.Y);
+        public static PointF Add(this PointF minuend, Point subtrahend) => new(minuend.X + subtrahend.X, minuend.Y + subtrahend.Y);
 
         /// <summary>
         /// Adds the specified subtrahend.
@@ -510,7 +511,7 @@ namespace PolygonLibrary
         /// <param name="subtrahend">The subtrahend.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static PointF Add(this Point minuend, PointF subtrahend) => new PointF(minuend.X + subtrahend.X, minuend.Y + subtrahend.Y);
+        public static PointF Add(this Point minuend, PointF subtrahend) => new(minuend.X + subtrahend.X, minuend.Y + subtrahend.Y);
 
         /// <summary>
         /// Adds the specified subtrahend.
@@ -519,7 +520,7 @@ namespace PolygonLibrary
         /// <param name="subtrahend">The subtrahend.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Point Add(this Point minuend, Point subtrahend) => new Point(minuend.X + subtrahend.X, minuend.Y + subtrahend.Y);
+        public static Point Add(this Point minuend, Point subtrahend) => new(minuend.X + subtrahend.X, minuend.Y + subtrahend.Y);
         #endregion
 
         #region Scale Point
@@ -530,7 +531,7 @@ namespace PolygonLibrary
         /// <param name="scaler">The scaler.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static PointF Scale(this PointF multiplicand, float scaler) => new PointF(multiplicand.X * scaler, multiplicand.Y * scaler);
+        public static PointF Scale(this PointF multiplicand, float scaler) => new(multiplicand.X * scaler, multiplicand.Y * scaler);
 
         /// <summary>
         /// Scales the specified multiplier.
@@ -539,7 +540,7 @@ namespace PolygonLibrary
         /// <param name="scaler">The scaler.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static PointF Scale(this PointF multiplicand, SizeF scaler) => new PointF(multiplicand.X * scaler.Width, multiplicand.Y * scaler.Height);
+        public static PointF Scale(this PointF multiplicand, SizeF scaler) => new(multiplicand.X * scaler.Width, multiplicand.Y * scaler.Height);
 
         /// <summary>
         /// Scales the specified scaler.
@@ -548,7 +549,7 @@ namespace PolygonLibrary
         /// <param name="scaler">The scaler.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static PointF Scale(this Point multiplicand, float scaler) => new PointF(multiplicand.X * scaler, multiplicand.Y * scaler);
+        public static PointF Scale(this Point multiplicand, float scaler) => new(multiplicand.X * scaler, multiplicand.Y * scaler);
 
         /// <summary>
         /// Scales the specified scaler.
@@ -557,7 +558,7 @@ namespace PolygonLibrary
         /// <param name="scaler">The scaler.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static PointF Scale(this Point multiplicand, SizeF scaler) => new PointF(multiplicand.X * scaler.Width, multiplicand.Y * scaler.Height);
+        public static PointF Scale(this Point multiplicand, SizeF scaler) => new(multiplicand.X * scaler.Width, multiplicand.Y * scaler.Height);
 
         /// <summary>
         /// Scales the specified scaler.
@@ -566,7 +567,7 @@ namespace PolygonLibrary
         /// <param name="scaler">The scaler.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Point Scale(this Point multiplicand, int scaler) => new Point(multiplicand.X * scaler, multiplicand.Y * scaler);
+        public static Point Scale(this Point multiplicand, int scaler) => new(multiplicand.X * scaler, multiplicand.Y * scaler);
 
         /// <summary>
         /// Scales the specified scaler.
@@ -575,7 +576,7 @@ namespace PolygonLibrary
         /// <param name="scaler">The scaler.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Point Scale(this Point multiplicand, Size scaler) => new Point(multiplicand.X * scaler.Width, multiplicand.Y * scaler.Height);
+        public static Point Scale(this Point multiplicand, Size scaler) => new(multiplicand.X * scaler.Width, multiplicand.Y * scaler.Height);
         #endregion Scale Point
 
         #region Point To String
@@ -586,7 +587,7 @@ namespace PolygonLibrary
         /// <param name="format">The format.</param>
         /// <param name="provider">The provider.</param>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToString(this PointF point, string format, IFormatProvider provider) => $"{{X={point.X.ToString(format, provider)}, Y={point.Y.ToString(format, provider)}}}";
@@ -598,7 +599,7 @@ namespace PolygonLibrary
         /// <param name="format">The format.</param>
         /// <param name="provider">The provider.</param>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToString(this Point point, string format, IFormatProvider provider) => $"{{X={point.X.ToString(format, provider)}, Y={point.Y.ToString(format, provider)}}}";

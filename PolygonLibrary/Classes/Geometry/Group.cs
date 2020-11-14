@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Numerics;
 
@@ -36,9 +37,17 @@ namespace PolygonLibrary
         /// Initializes a new instance of the <see cref="Group"/> class.
         /// </summary>
         /// <param name="shapes">The shapes.</param>
-        public Group(List<IGeometry> shapes)
+        public Group(params IGeometry[] shapes)
+            : this(shapes.ToList())
+        { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Group"/> class.
+        /// </summary>
+        /// <param name="shapes">The shapes.</param>
+        public Group(IEnumerable<IGeometry> shapes)
         {
-            Shapes = shapes;
+            Shapes = shapes as List<IGeometry> ?? new List<IGeometry>();
         }
         #endregion
 
@@ -316,17 +325,34 @@ namespace PolygonLibrary
         public IEnumerator<IGeometry> GetEnumerator() => Shapes.GetEnumerator();
 
         /// <summary>
-        /// Creates a string representation of this <see cref="Group" /> struct based on the format string
-        /// and IFormatProvider passed in.
+        /// Creates a string representation of this <see cref="Group" /> struct based on the format string and IFormatProvider passed in.
         /// If the provider is null, the CurrentCulture is used.
-        /// See the documentation for IFormattable for more information.
         /// </summary>
-        /// <param name="format">The format.</param>
-        /// <param name="provider">The provider.</param>
         /// <returns>
         /// A <see cref="string" /> representation of this object.
         /// </returns>
-        public string ToString(string format, IFormatProvider provider)
+        public override string? ToString() => ToString("R" /* format string */, CultureInfo.InvariantCulture /* format provider */);
+
+        /// <summary>
+        /// Creates a string representation of this <see cref="Group" /> struct based on the format string and IFormatProvider passed in.
+        /// If the provider is null, the CurrentCulture is used.
+        /// </summary>
+        /// <param name="formatProvider">The format provider.</param>
+        /// <returns>
+        /// A <see cref="string" /> representation of this object.
+        /// </returns>
+        public string? ToString(IFormatProvider formatProvider) => ToString("R" /* format string */, formatProvider);
+
+        /// <summary>
+        /// Creates a string representation of this <see cref="Group" /> struct based on the format string and IFormatProvider passed in.
+        /// If the provider is null, the CurrentCulture is used.
+        /// </summary>
+        /// <param name="format">The format.</param>
+        /// <param name="formatProvider">The format provider.</param>
+        /// <returns>
+        /// A <see cref="string" /> representation of this object.
+        /// </returns>
+        public string? ToString(string format, IFormatProvider formatProvider)
         {
             if (this is null)
             {
@@ -334,14 +360,14 @@ namespace PolygonLibrary
             }
 
             var sep = ',';
-            return $"{nameof(Group)}{{{string.Join(sep.ToString(), Shapes.Select(x => x.ToString()))}}}";
+            return $"{nameof(Group)}{{{string.Join(sep.ToString(), Shapes.Select(x => x.ToString(format, formatProvider)))}}}";
         }
 
         /// <summary>
         /// Gets the debugger display.
         /// </summary>
         /// <returns></returns>
-        private string GetDebuggerDisplay() => ToString();
+        private string GetDebuggerDisplay() => ToString("R" /* format string */, CultureInfo.InvariantCulture /* format provider */) ?? string.Empty;
         #endregion
     }
 }

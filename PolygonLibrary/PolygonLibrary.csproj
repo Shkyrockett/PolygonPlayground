@@ -4,6 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <Platforms>AnyCPU;x64;x86</Platforms>
     <Version>0.0.0.1</Version>
+    <Nullable>enable</Nullable>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Authors>Shkyrockett</Authors>
     <Product>PolygonLibrary</Product>
@@ -19,6 +20,10 @@
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>

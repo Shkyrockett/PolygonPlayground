@@ -1,4 +1,4 @@
-﻿// <copyright file="IAction.cs">
+﻿// <copyright file="ITransform.cs">
 //     Copyright © 2020 Shkyrockett. All rights reserved.
 // </copyright>
 // <author id="shkyrockett">Shkyrockett</author>
@@ -13,7 +13,7 @@ namespace PolygonLibrary
     /// <summary>
     /// 
     /// </summary>
-    public interface IAction
+    public interface ITransform
     {
         /// <summary>
         /// Executes this instance.

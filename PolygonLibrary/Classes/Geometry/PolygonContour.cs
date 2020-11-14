@@ -50,7 +50,7 @@ namespace PolygonLibrary
         /// </summary>
         /// <param name="points">The <paramref name="points" />.</param>
         public PolygonContour(params PointF[] points)
-            : this(new List<PointF>(points))
+            : this(points.ToList())
         { }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace PolygonLibrary
         /// <param name="points">The <paramref name="points" />.</param>
         public PolygonContour(IEnumerable<PointF> points)
         {
-            Points = points as List<PointF>;
+            Points = points as List<PointF> ?? new List<PointF>();
         }
         #endregion Constructors
 
@@ -222,7 +222,7 @@ namespace PolygonLibrary
         /// <returns>
         /// The <see cref="PolygonContour" />.
         /// </returns>
-        public PolygonContour Clone() => new PolygonContour(Points.ToArray());
+        public PolygonContour Clone() => new(Points.ToArray());
 
         /// <summary>
         /// Parse the path def string.
@@ -281,7 +281,7 @@ namespace PolygonLibrary
         /// <returns>
         /// The <see cref="string" />.
         /// </returns>
-        public string ToPathDefString(string format, IFormatProvider provider)
+        public string ToPathDefString(string? format, IFormatProvider provider)
         {
             var output = new StringBuilder();
 
@@ -300,17 +300,34 @@ namespace PolygonLibrary
         }
 
         /// <summary>
-        /// Creates a string representation of this <see cref="PolygonContour" /> struct based on the format string
-        /// and IFormatProvider passed in.
+        /// Creates a string representation of this <see cref="PolygonContour" /> struct based on the format string and IFormatProvider passed in.
         /// If the provider is null, the CurrentCulture is used.
-        /// See the documentation for IFormattable for more information.
         /// </summary>
-        /// <param name="format">The format.</param>
-        /// <param name="provider">The provider.</param>
         /// <returns>
         /// A <see cref="string" /> representation of this object.
         /// </returns>
-        public string ToString(string format, IFormatProvider provider)
+        public override string? ToString() => ToString("R" /* format string */, CultureInfo.InvariantCulture /* format provider */);
+
+        /// <summary>
+        /// Creates a string representation of this <see cref="PolygonContour" /> struct based on the format string and IFormatProvider passed in.
+        /// If the provider is null, the CurrentCulture is used.
+        /// </summary>
+        /// <param name="formatProvider">The format provider.</param>
+        /// <returns>
+        /// A <see cref="string" /> representation of this object.
+        /// </returns>
+        public string? ToString(IFormatProvider formatProvider) => ToString("R" /* format string */, formatProvider);
+
+        /// <summary>
+        /// Creates a string representation of this <see cref="PolygonContour" /> struct based on the format string and IFormatProvider passed in.
+        /// If the provider is null, the CurrentCulture is used.
+        /// </summary>
+        /// <param name="format">The format.</param>
+        /// <param name="formatProvider">The provider.</param>
+        /// <returns>
+        /// A <see cref="string" /> representation of this object.
+        /// </returns>
+        public string? ToString(string format, IFormatProvider formatProvider)
         {
             if (this is null)
             {
@@ -318,14 +335,14 @@ namespace PolygonLibrary
             }
 
             var sep = ',';
-            return $"{nameof(PolygonContour)}{{{string.Join(sep.ToString(), Points.Select(x => x.ToString()))}}}";
+            return $"{nameof(PolygonContour)}{{{string.Join(sep.ToString(), Points.Select(x => x.ToString("R" /* format string */, CultureInfo.InvariantCulture /* format provider */)))}}}";
         }
 
         /// <summary>
         /// Gets the debugger display.
         /// </summary>
         /// <returns></returns>
-        private string GetDebuggerDisplay() => ToString();
+        private string GetDebuggerDisplay() => ToString("R" /* format string */, CultureInfo.InvariantCulture /* format provider */) ?? string.Empty;
         #endregion Methods
     }
 }

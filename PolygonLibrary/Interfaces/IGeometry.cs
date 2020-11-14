@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Numerics;
 
 namespace PolygonLibrary
@@ -57,6 +58,32 @@ namespace PolygonLibrary
         /// <param name="point">The point.</param>
         /// <returns></returns>
         bool Includes(PointF point);
+
+        /// <summary>
+        /// Creates a string representation of this <see cref="IGeometry" /> struct based on the format string and IFormatProvider passed in.
+        /// If the provider is null, the CurrentCulture is used.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string" /> representation of this object.
+        /// </returns>
+        public string? ToString() => ToString("R" /* format string */, CultureInfo.InvariantCulture /* format provider */);
+
+        /// <summary>
+        /// Creates a string representation of this <see cref="IGeometry" /> struct based on the format string and IFormatProvider passed in.
+        /// If the provider is null, the CurrentCulture is used.
+        /// </summary>
+        /// <param name="formatProvider">The format provider.</param>
+        /// <returns></returns>
+        public string? ToString(IFormatProvider formatProvider) => ToString("R" /* format string */, CultureInfo.InvariantCulture /* format provider */);
+
+        /// <summary>
+        /// Creates a string representation of this <see cref="IGeometry" /> struct based on the format string and IFormatProvider passed in.
+        /// If the provider is null, the CurrentCulture is used.
+        /// </summary>
+        /// <param name="format">The format.</param>
+        /// <param name="formatProvider">The format provider.</param>
+        /// <returns></returns>
+        string? ToString(string format, IFormatProvider formatProvider);
         #endregion
     }
 
