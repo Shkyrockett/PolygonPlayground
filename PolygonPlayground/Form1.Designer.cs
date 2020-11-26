@@ -103,11 +103,10 @@ namespace PolygonPlayground
             this.canvasControl.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.canvasControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvasControl.GhostPolygonPen = null;
-            this.canvasControl.HandleRadius = 0;
             this.canvasControl.Location = new System.Drawing.Point(0, 0);
             this.canvasControl.Name = "canvasControl";
-            this.canvasControl.PanPoint = ((System.Drawing.PointF)(resources.GetObject("canvasControl.PanPoint")));
-            this.canvasControl.Scale = 1F;
+            this.canvasControl.Pan = ((System.Drawing.PointF)(resources.GetObject("canvasControl.PanPoint")));
+            this.canvasControl.Zoom = 1F;
             this.canvasControl.Size = new System.Drawing.Size(740, 495);
             this.canvasControl.TabIndex = 3;
             // 
@@ -170,6 +169,7 @@ namespace PolygonPlayground
             this.ClientSize = new System.Drawing.Size(933, 519);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Polygon Playground";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

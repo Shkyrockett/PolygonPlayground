@@ -15,7 +15,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
-using static PolygonLibrary.Mathematics;
+using static PolygonLibrary.MathematicsF;
 
 namespace PolygonPlayground
 {
@@ -126,6 +126,7 @@ namespace PolygonPlayground
         public CanvasControl()
         {
             DoubleBuffered = true;
+            HandleRadius = 3;
             InitializeComponent();
         }
         #endregion
@@ -167,12 +168,20 @@ namespace PolygonPlayground
         private int HandleRadiusSquared => HandleRadius * HandleRadius;
 
         /// <summary>
+        /// Gets or sets the document.
+        /// </summary>
+        /// <value>
+        /// The document.
+        /// </value>
+        public Group Document { get => group; set => group = value; }
+
+        /// <summary>
         /// Gets or sets the pan point.
         /// </summary>
         /// <value>
         /// The pan point.
         /// </value>
-        public PointF PanPoint
+        public PointF Pan
         {
             get => panPoint; set
             {
@@ -187,7 +196,7 @@ namespace PolygonPlayground
         /// <value>
         /// The scale.
         /// </value>
-        public new float Scale
+        public float Zoom
         {
             get => scale; set
             {
