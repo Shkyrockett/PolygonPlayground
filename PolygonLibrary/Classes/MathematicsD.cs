@@ -373,7 +373,7 @@ namespace PolygonLibrary
         public static PointF ScreenToObjectTransposedMatrix_(PointF offset, PointF screenPoint, double scale)
         {
             var invScale = 1d / scale;
-            return new ((float)((screenPoint.X * invScale) - offset.X), (float)((screenPoint.Y * invScale) - offset.Y));
+            return new((float)((screenPoint.X * invScale) - offset.X), (float)((screenPoint.Y * invScale) - offset.Y));
         }
 
         /// <summary>
@@ -428,7 +428,7 @@ namespace PolygonLibrary
         {
             var point = ScreenToObject(offset, cursor, previousScale);
             point = ObjectToScreen(offset, point, scale);
-            return new ((float)(offset.X + ((cursor.X - point.X) / scale)), (float)(offset.Y + ((cursor.Y - point.Y) / scale)));
+            return new((float)(offset.X + ((cursor.X - point.X) / scale)), (float)(offset.Y + ((cursor.Y - point.Y) / scale)));
         }
 
         /// <summary>
@@ -444,7 +444,7 @@ namespace PolygonLibrary
         {
             var point = ScreenToObjectTransposedMatrix(offset, cursor, previousScale);
             point = ObjectToScreenTransposedMatrix(offset, point, scale);
-            return new ((float)(offset.X + ((cursor.X - point.X) / scale)), (float)(offset.Y + ((cursor.Y - point.Y) / scale)));
+            return new((float)(offset.X + ((cursor.X - point.X) / scale)), (float)(offset.Y + ((cursor.Y - point.Y) / scale)));
         }
         #endregion Point Manipulation Methods
     }

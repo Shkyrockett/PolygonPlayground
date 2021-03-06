@@ -2,13 +2,14 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <Platforms>AnyCPU;x64;x86</Platforms>
     <UseWindowsForms>true</UseWindowsForms>
     <Version>0.0.0.1</Version>
     <Authors>Shkyrockett</Authors>
     <Copyright>Copyright © Shkyrockett 2020</Copyright>
     <Description>Testing application for manipulating Polygons.</Description>
+    <PackageLicenseFile>Properties\LICENSE.md</PackageLicenseFile>
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <DocumentationFile>$(OutputPath)$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>

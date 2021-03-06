@@ -8,8 +8,8 @@
 // <summary></summary>
 // <remarks></remarks>
 
-using PolygonLibrary;
 using System.Drawing;
+using PolygonLibrary;
 
 namespace PolygonPlayground
 {

@@ -145,7 +145,7 @@ namespace PolygonLibrary
         /// <summary>
         /// Clears this instance.
         /// </summary>
-        void Clear() { }
+        new void Clear() { }
         #endregion Methods
     }
 }

@@ -8,13 +8,13 @@
 // <summary></summary>
 // <remarks></remarks>
 
-using PolygonLibrary;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
+using PolygonLibrary;
 using static PolygonLibrary.MathematicsF;
 
 namespace PolygonPlayground

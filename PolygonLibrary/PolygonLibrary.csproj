@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Platforms>AnyCPU;x64;x86</Platforms>
     <Version>0.0.0.1</Version>
     <Nullable>enable</Nullable>
@@ -12,6 +12,7 @@
     <Description>Library for manipulating Polygons.</Description>
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <DocumentationFile>$(OutputPath)$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    <PackageLicenseFile>Properties\LICENSE.md</PackageLicenseFile>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
