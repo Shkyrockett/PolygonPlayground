@@ -8,60 +8,56 @@
 // <summary></summary>
 // <remarks></remarks>
 
-using System;
-using System.Drawing;
 using System.Runtime.CompilerServices;
-using System.Windows.Forms;
 
-namespace PolygonPlayground
+namespace PolygonPlayground;
+
+/// <summary>
+/// The form1 class.
+/// </summary>
+/// <seealso cref="System.Windows.Forms.Form" />
+public partial class Form1
+    : Form
 {
+    #region Constructors
     /// <summary>
-    /// The form1 class.
+    /// Initializes a new instance of the <see cref="Form1" /> class.
     /// </summary>
-    /// <seealso cref="System.Windows.Forms.Form" />
-    public partial class Form1
-        : Form
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public Form1()
     {
-        #region Constructors
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Form1" /> class.
-        /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Form1()
-        {
-            InitializeComponent();
-        }
-        #endregion
-
-        #region Event Handlers
-        /// <summary>
-        /// Handles the Load event of the Form1 control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void Form1_Load(object sender, EventArgs e)
-        { }
-
-        /// <summary>
-        /// Handles the Click event of the ButtonResetPan control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
-        private void ButtonResetPan_Click(object sender, EventArgs e)
-        {
-            canvasControl.Pan = new PointF(0f, 0f);
-        }
-
-        /// <summary>
-        /// Handles the Click event of the ButtonResetScale control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
-        private void ButtonResetScale_Click(object sender, EventArgs e)
-        {
-            canvasControl.Zoom = 1;
-        }
-        #endregion Event Handlers
+        InitializeComponent();
     }
+    #endregion
+
+    #region Event Handlers
+    /// <summary>
+    /// Handles the Load event of the Form1 control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private void Form1_Load(object sender, EventArgs e)
+    { }
+
+    /// <summary>
+    /// Handles the Click event of the ButtonResetPan control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
+    private void ButtonResetPan_Click(object sender, EventArgs e)
+    {
+        canvasControl.Pan = new PointF(0f, 0f);
+    }
+
+    /// <summary>
+    /// Handles the Click event of the ButtonResetScale control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
+    private void ButtonResetScale_Click(object sender, EventArgs e)
+    {
+        canvasControl.Zoom = 1;
+    }
+    #endregion Event Handlers
 }

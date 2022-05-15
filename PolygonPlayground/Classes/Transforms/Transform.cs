@@ -1,9 +1,8 @@
-﻿namespace PolygonLibrary
+﻿namespace PolygonLibrary;
+
+/// <summary>
+/// 
+/// </summary>
+public class Transform
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Transform
-    {
-    }
 }

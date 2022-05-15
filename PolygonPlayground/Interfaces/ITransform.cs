@@ -8,16 +8,15 @@
 // <summary></summary>
 // <remarks></remarks>
 
-namespace PolygonLibrary
+namespace PolygonLibrary;
+
+/// <summary>
+/// 
+/// </summary>
+public interface ITransform
 {
     /// <summary>
-    /// 
+    /// Executes this instance.
     /// </summary>
-    public interface ITransform
-    {
-        /// <summary>
-        /// Executes this instance.
-        /// </summary>
-        void Execute();
-    }
+    void Execute();
 }

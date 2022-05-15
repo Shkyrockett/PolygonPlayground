@@ -8,27 +8,26 @@
 // <summary></summary>
 // <remarks></remarks>
 
-namespace PolygonLibrary
+namespace PolygonLibrary;
+
+/// <summary>
+/// Enumeration of the inclusion of a point within a shape.
+/// </summary>
+public enum Inclusions
+    : sbyte
 {
     /// <summary>
-    /// Enumeration of the inclusion of a point within a shape.
+    /// Touches the boundary of the shape.
     /// </summary>
-    public enum Inclusions
-        : sbyte
-    {
-        /// <summary>
-        /// Touches the boundary of the shape.
-        /// </summary>
-        Boundary = -1,
+    Boundary = -1,
 
-        /// <summary>
-        /// Point lies outside the shape.
-        /// </summary>
-        Outside = 0,
+    /// <summary>
+    /// Point lies outside the shape.
+    /// </summary>
+    Outside = 0,
 
-        /// <summary>
-        /// Point is contained inside the shape.
-        /// </summary>
-        Inside = 1,
-    }
+    /// <summary>
+    /// Point is contained inside the shape.
+    /// </summary>
+    Inside = 1,
 }

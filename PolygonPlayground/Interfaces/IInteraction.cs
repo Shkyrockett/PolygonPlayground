@@ -1,9 +1,8 @@
-﻿namespace PolygonLibrary
+﻿namespace PolygonLibrary;
+
+/// <summary>
+/// 
+/// </summary>
+public interface IInteraction
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public interface IInteraction
-    {
-    }
 }
